@@ -19,3 +19,5 @@ WORKDIR /src
 
 # Define default command.
 CMD ["bash"]
+
+CMD "service ssh start"
