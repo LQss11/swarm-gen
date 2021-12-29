@@ -7,7 +7,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN \
   apt-get update && \
   apt-get install -y sudo curl wget net-tools openssh-server inetutils-ping  
-  
+
 # Set environment variables.
 ENV HOME /root
 
@@ -17,7 +17,7 @@ COPY /src /src
 # Define working directory.
 WORKDIR /src
 
+#CMD ["bash"]
 # Define default command.
-CMD ["bash"]
-
-CMD "service ssh start"
+CMD ["sh" , "-c", "service ssh start && bash"]
+#ENTRYPOINT : ["bash","-c","ls"]
