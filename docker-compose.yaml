@@ -1,12 +1,33 @@
 version: '3.8'
 services:
-  cmake2:
+  ubuntu:
     container_name: pfe
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile  
     restart: always
     volumes:
       - './src:/src'
-      - '/var/run/docker.sock:/var/run/docker.sock'
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+      - /usr/local/bin/docker-compose:/usr/local/bin/docker-compose
     tty: true
+    networks:
+      - pfe      
+  ubuntu2:
+    container_name: pfe2
+    build:
+      context: .
+      dockerfile: Dockerfile   
+    restart: always
+    volumes:
+      - './src:/src'
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+      - /usr/local/bin/docker-compose:/usr/local/bin/docker-compose
+    tty: true
+    networks:
+      - pfe  
+
+networks:
+  pfe:
