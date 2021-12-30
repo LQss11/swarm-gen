@@ -1,6 +1,7 @@
 version: '3.8'
 services:
-  machine:
+  master:
+    hostname: master
     build:
       context: .
       dockerfile: master.ubuntu.Dockerfile  

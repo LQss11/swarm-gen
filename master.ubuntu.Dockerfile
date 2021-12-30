@@ -23,6 +23,15 @@ COPY /src /src
 # Define working directory.
 WORKDIR /src
 
+# Expose port for ssh
+EXPOSE 22
+
+# Updating root password
+RUN echo 'root:root' | chpasswd
+
+# Allowing root login with ssh
+RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+
 # Start SSH service then use bash
 # Define default command.
-CMD ["sh" , "-c", "service ssh start && bash"]
+CMD ["sh" , "-c", "service ssh restart && bash"]

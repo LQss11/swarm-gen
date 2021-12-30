@@ -29,5 +29,11 @@ WORKDIR /src
 # Expose port for ssh
 EXPOSE 22
 
+# Updating root password
+RUN echo 'root:root' | chpasswd
+
+# Allowing root login with ssh
+RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+
 # Start SSH Service
 CMD ["sh" , "-c", "service sshd restart && sh"]
