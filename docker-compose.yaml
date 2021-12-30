@@ -3,7 +3,7 @@ services:
   machine:
     build:
       context: .
-      dockerfile: Dockerfile  
+      dockerfile: master.ubuntu.Dockerfile  
     restart: always
     volumes:
       - './src:/src'
@@ -12,5 +12,17 @@ services:
     tty: true
     networks:
       - swarm-gen      
+  slave:
+    build:
+      context: .
+      dockerfile: slave.dind.Dockerfile  
+    restart: always
+    volumes:
+      - './src:/src' 
+      - './src/script.sh:/dockerd-entrypoint.sh' 
+    privileged: true    
+    tty: true
+    networks:
+      - swarm-gen            
 networks:
   swarm-gen:
