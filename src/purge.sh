@@ -5,6 +5,6 @@ IPS=$(docker ps -q | xargs -n 1 docker inspect --format '{{ .Name }} {{range .Ne
 
 for ip in $IPS; do
     echo "$ip"
-    sshpass -p root ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no root@$ip docker swarm leave -f # leave swarm if already in one
-
+    # leave swarm if already in one
+    sshpass -p root ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no root@$ip docker swarm leave -f
 done
