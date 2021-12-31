@@ -4,7 +4,7 @@ FROM docker:dind
 # Install initials
 RUN \
   apk update && \
-  apk add curl wget net-tools iputils bash
+  apk add curl wget net-tools iputils sshpass bash
 
 # Setup SSH Service
 RUN \
@@ -20,12 +20,6 @@ RUN \
   chmod +x /usr/local/bin/docker-compose
  
 
-# COPY required files.
-COPY /src /src
-
-# Define working directory.
-WORKDIR /src
-
 # Expose port for ssh
 EXPOSE 22
 
@@ -36,4 +30,4 @@ RUN echo 'root:root' | chpasswd
 RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
 # Start SSH Service & Run the entrypoint script
-CMD [ "sh", "-c", "service sshd restart &&  dockerd-entrypoint.sh && bash"]
+CMD [ "sh", "-c", "service sshd restart &&  dockerd-entrypoint.sh && bash" ]
