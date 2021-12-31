@@ -29,6 +29,3 @@ while read -p "What is the number of the machine you want to join as a worker? [
     fi
 done
 
-#TOKEN=$(docker swarm join-token worker | grep token)
-
-#sshpass -p  root  ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no  root@swarm_slave_3 $TOKEN
