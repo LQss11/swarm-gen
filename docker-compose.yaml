@@ -6,8 +6,11 @@ services:
       context: .
       dockerfile: master.ubuntu.Dockerfile  
     restart: always
+    ports:
+      - '7777:80'
     volumes:
       - './src:/src'
+      - './app:/var/www/html'
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/bin/docker:/usr/bin/docker    
     tty: true

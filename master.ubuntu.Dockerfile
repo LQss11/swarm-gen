@@ -7,7 +7,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 # Install initials
 RUN \
   apt-get update && \
-  apt-get install -y sudo curl wget net-tools openssh-server inetutils-ping sshpass 
+  apt-get install -y sudo curl wget net-tools openssh-server inetutils-ping sshpass php libapache2-mod-php
 
 # install docker-compose
 RUN \
@@ -26,12 +26,14 @@ WORKDIR /src
 # Expose port for ssh
 EXPOSE 22
 
+EXPOSE 80
+
 # Updating root password
 RUN echo 'root:root' | chpasswd
 
 # Allowing root login with ssh
 RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
-# Start SSH service then use bash
+# Start SSH and apache service then use bash
 # Define default command.
-CMD ["sh" , "-c", "service ssh restart && bash"]
+CMD ["sh" , "-c", "service ssh restart && service apache2 restart && bash"]
