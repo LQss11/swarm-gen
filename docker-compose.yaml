@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  master:
+    hostname: master
+    build:
+      context: .
+      dockerfile: master.ubuntu.Dockerfile  
+    restart: always
+    ports:
+      - '7777:80'
+    volumes:
+      - './src:/src'
+      - './app:/var/www/html'
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker    
+    tty: true
+    networks:
+      - swarm-gen      
+  slave:
+    build:
+      context: .
+      dockerfile: slave.dind.Dockerfile  
+    restart: always
+    privileged: true    
+    tty: true
+    networks:
+      - swarm-gen            
+networks:
+  swarm-gen:
