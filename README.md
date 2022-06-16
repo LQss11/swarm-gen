@@ -40,3 +40,10 @@ check containers
 ```sh
 docker service ls
 ```
+
+# Info
+This project is based on an old project, a lot of changes in environments has changed causing issues:
+```
+http://localhost:7777/LoginPage/loginh.php
+```
+you can check some info here
